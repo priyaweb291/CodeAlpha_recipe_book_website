@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe web page</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+
+   
+    <script src="js/3.4.1.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+    
+</head>
+<body>
+    
+    <div class="container">
+        <nav class="navbar navbar-fixed-top">
+            <div id="ind" class="container">
+                <div class="navbar-header">
+                    
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="index.html">HOME</a></li>
+                        <!-- <span class="caret"></span></a> -->
+                        <li class="active"><a href="team.html">RECIPES</a></li>
+                        <li><a href="contact.html">CONTACT</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+
+    <div class="container-fluid" style="padding:0;">
+        <div class="banner">
+            <img src="images/banner1.jpg">
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div class="rec_area">
+            <h1>
+                Share your delicious recipes
+            </h1>
+    
+            <div class="row">
+    
+                <div class="img1 col-sm-4">
+                    <img src="images/chicken.jpg">
+    
+                </div>
+    
+                <div class="img1 col-sm-4">
+                    <img src="images/fish.jpg">
+    
+                </div>
+    
+                <div class="img2 col-sm-4">
+                    <img src="images/profile.png" id="profile-pic">
+                    <label for="input-file">Update image</label>
+                    <input type="file" accept="image/jpeg, image/png, image/jpg" id="input-file">
+                </div>
+            </div>
+    
+    
+            <div class="row1">
+            
+                <textarea id="txt" class="typing" rows="10" cols="103">
+            
+                             </textarea>
+            
+                <div class="button_area">
+                    <button onClick="addLI()" class="a">Add</button>
+                    <button onClick="editLI()" class="a">Edit</button>
+                    <button onClick="deleteLI()" class="a">Delete</button>
+                </div>
+            
+            
+            
+                <ul id="list" class="rec_1">
+                    <li>
+            
+                        1. Dry the chicken cubes with paper towels and toss them with the flour,
+                        salt, and pepper in a bowl. Trust me, don’t be tempted to ad more flour,
+                        the amount mentioned is perfect. Heat the oil in a 12-inch skillet over
+                        high heat until very hot but not smoking, add the cubed chicken, and cook
+                        in one layer, for about 4-5 minutes, this will develop a lovely crust.
+                        Turn pieces of chicken and continue cooking for 3-5 more minutes.<br><br>
+            
+                        2. Meanwhile, combine the garlic and parsley in a small bowl. Add the
+                        butter and the parsley mixture to the skillet and saute for 1 minute
+                        longer, shaking the skillet occasionally to coat the chicken. Use a
+                        spoon to remove the chicken to a plate, leaving brown bits, extra
+                        parsley and garlic in the pan.<br><br>
+            
+            
+                        3. If there’s a lot of oil in the pan, remove all but about a tablespoon.
+                        Most likely you won’t have to remove much. Add the butter and cook over
+                        medium heat to melt. Add the flour and mix together, cook for a minute or so,
+                        stirring continuously. Slowly add the chicken broth, whisking to combine
+                        until all broth has been added. Cook over medium high heat, stirring
+                        constantly until gravy has cooked down a bit and thickened. Serve over chicken.<br><br><br><br>
+            
+            
+                    <li>
+            
+                        1. To make this delicious Hilsha Fish, wash the fish and slice it into pieces.
+                        Once done, marinate the pieces using salt and turmeric. Keep it aside for some time.
+                        Then, heat some oil in the pan and shallow fry the marinated fish pieces until they turn golden.
+                        In another pan, heat the remaining oil, and add the cumin seeds. Silt the green chillies
+                        and add to the oil. Keep stirring.<br>
+                        Add the fried fish pieces to the oil, then pour in the boiled water.
+                        Now, add the salt and turmeric powder as per your taste. Bring it to a boil and let
+                        it cook for a few minutes.<br>
+                        Serve your Bengali fish curry hot with steamed rice.<br><br><br><br>
+            
+                    </li>
+            
+            
+                    </li>
+            
+            
+            
+            
+            
+            
+                </ul>
+            
+            
+            
+            </div>
+        </div>
+    </div>
+
+
+                    <script>
+                     let profilePic = document.getElementById("profile-pic");
+                        let inputFile = document.getElementById("input-file");
+
+                              inputFile.onchange = function () {
+
+                        profilePic.src = URL.createObjectURL(inputFile.files[0]);
+
+                        }
+
+                    </script>
+
+
+<script>
+
+    var btnText = document.getElementById("txt"),
+        items = document.querySelectorAll("#list li"),
+        tab = [], index;
+
+    for (var i = 0; i < items.length; i++) {
+        tab.push(items[i].innerHTML)
+    }
+
+
+    for (var i = 0; i < items.length; i++) {
+
+        items[i].onclick = function () {
+
+            index = tab.indexOf(this.innerHTML);
+            console.log(this.innerHTML + "INDEX =" + index);
+
+            btnText.value = this.innerHTML;
+        };
+
+    }
+
+
+
+    function refreshArray() {
+
+        tab.length = 0;
+        items = document.querySelectorAll("#list li");
+
+        for (var i = 0; i < items.length; i++) {
+            tab.push(items[i].innerHTML)
+        }
+
+    }
+
+
+
+    function addLI() {
+
+        var listMy = document.getElementById("list")
+        var textNode = document.createTextNode(btnText.value)
+        var liNode = document.createElement("LI");
+
+        liNode.appendChild(textNode);
+        listMy.appendChild(liNode);
+
+        refreshArray();
+
+        liNode.onclick = function () {
+
+            index = tab.indexOf(liNode.innerHTML);
+            console.log(liNode.innerHTML + "INDEX =" + index);
+
+            btnText.value = liNode.innerHTML;
+        };
+
+    }
+
+
+
+    function editLI() {
+
+        items[index].innerHTML = btnText.value;
+        refreshArray();
+
+
+    }
+
+    function deleteLI() {
+
+        refreshArray();
+
+        if (items.length > 0) {
+            items[index].parentNode.removeChild(items[index]);
+            btnText.value = "";
+        }
+
+    }
+
+
+
+
+
+
+
+</script>
+
+
+
+</body>
+</html>
